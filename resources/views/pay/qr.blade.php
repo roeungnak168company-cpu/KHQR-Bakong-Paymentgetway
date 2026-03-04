@@ -116,7 +116,7 @@
             setState('success', 'PAID', 'Redirecting to receipt…');
             qrel.classList.add('qrMuted');
             setTimeout(() => {
-              window.location.href = @json(url('/store/success')) + '/' + encodeURIComponent(md5);
+             window.location.href = '/store/success/' + encodeURIComponent(md5);
             }, 800);
             return;
           }
