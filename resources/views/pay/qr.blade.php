@@ -85,11 +85,11 @@
         }
 
         try {
-          const resp = await fetch(@json(route('qr.check')), {
+          const resp = await fetch('/api/qr/check', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'X-CSRF-TOKEN': @json(csrf_token())
+              'Accept': 'application/json'
             },
             body: JSON.stringify({ md5 })
           });
