@@ -85,14 +85,14 @@
         }
 
         try {
-      const resp = await fetch('/api/qr/check', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  },
-  body: JSON.stringify({ md5 })
-});
+          const resp = await fetch('qr/check', {
+         method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': @json(csrf_token())
+        },
+         body: JSON.stringify({ md5 })
+        });
 
           const data = await resp.json().catch(() => ({}));
 
@@ -116,7 +116,7 @@
             setState('success', 'PAID', 'Redirecting to receipt…');
             qrel.classList.add('qrMuted');
             setTimeout(() => {
-             window.location.href = '/store/success/' + encodeURIComponent(md5);
+              window.location.href = @json(url('/store/success')) + '/' + encodeURIComponent(md5);
             }, 800);
             return;
           }
