@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8" />
-<meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pay {{ $order->md5 }}</title>
   <style>
@@ -86,11 +85,14 @@
         }
 
         try {
-        const resp = await fetch('/api/qr/check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({ md5 })
-        });
+      const resp = await fetch('/api/qr/check', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  },
+  body: JSON.stringify({ md5 })
+});
 
           const data = await resp.json().catch(() => ({}));
 
