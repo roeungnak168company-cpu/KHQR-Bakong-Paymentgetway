@@ -3,9 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return redirect('/store');
+});
+Route::get('/clear', function () {
+    Artisan::call('optimize:clear');
+    return 'cleared';
 });
 
 Route::get('/store', [StoreController::class, 'index'])->name('store');
