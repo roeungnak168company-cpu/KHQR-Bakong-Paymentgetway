@@ -87,7 +87,7 @@
 
         try {
       const token = document.querySelector('meta[name="csrf-token"]').content;
-      const resp = await fetch('/api/qr/check', {
+      const resp = await fetch('/qr/check', {
         method: 'POST',
         headers: { 
       'Content-Type': 'application/json',
