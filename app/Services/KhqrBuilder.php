@@ -60,7 +60,8 @@ class KhqrBuilder
 
         $p00 = $this->tlv('00', '01');
         $p01 = $this->tlv('01', '12');
-        $p15 = $this->tlv('15', '1974011600520446BONG1000231208129');
+        $acquirerId = '1974011600520446BONG1000231208129291900';
+        $p15 = $this->tlv('15', '00' . str_pad((string)strlen($acquirerId), 2, '0', STR_PAD_LEFT) . $acquirerId);
 
         $sub00 = '00' . str_pad((string)strlen($receiver), 2, '0', STR_PAD_LEFT) . $receiver;
         $p29 = $this->tlv('29', $sub00);
