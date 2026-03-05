@@ -85,7 +85,7 @@
         }
 
         try {
-          const resp = await fetch('/api/qr/check', {
+          const resp = await fetch(@json(url('/api/qr/check')), {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
