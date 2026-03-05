@@ -27,12 +27,7 @@ class BakongApiService
 
         $url = $this->getApiUrl();
 
-        Log::info('BAKONG API CALL', [
-            'url'          => $url,
-            'md5'          => $md5,
-            'token_length' => strlen($token),
-            'token_prefix' => substr($token, 0, 20) . '...',
-        ]);
+        error_log('[BAKONG] CALL url=' . $url . ' md5=' . $md5 . ' token_len=' . strlen($token));
 
         $resp = Http::timeout(15)
             ->withHeaders([
@@ -42,10 +37,7 @@ class BakongApiService
             ])
             ->post($url, ['md5' => $md5]);
 
-        Log::info('BAKONG API RESPONSE', [
-            'status' => $resp->status(),
-            'body'   => $resp->body(),
-        ]);
+        error_log('[BAKONG] RESPONSE status=' . $resp->status() . ' body=' . $resp->body());
 
         if (!$resp->ok()) {
             return [
