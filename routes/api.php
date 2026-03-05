@@ -9,4 +9,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::post('/qr/check', [PaymentController::class, 'check'])->name('api.qr.check');
+Route::post('/qr/check', [PaymentController::class, 'check'])
+    ->name('api.qr.check')
+    ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class);
