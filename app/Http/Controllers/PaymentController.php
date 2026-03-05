@@ -8,6 +8,7 @@ use App\Services\KhqrBuilder;
 use App\Services\TelegramService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -64,7 +65,12 @@ class PaymentController extends Controller
 
     public function check(Request $request, BakongApiService $bakong, TelegramService $telegram)
     {
-        $md5 = (string)$request->input('md5', '');
+        $md5 = trim((string)$request->input('md5', ''));
+
+        Log::info('QR CHECK REQUEST', [
+            'received_md5' => $md5
+        ]);
+
         if ($md5 === '') return response()->json(['error' => 'md5 is required'], 400);
 
         $order = Order::where('md5', $md5)->first();
