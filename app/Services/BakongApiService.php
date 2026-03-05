@@ -8,7 +8,7 @@ class BakongApiService
 {
     public function checkTransactionByMd5(string $md5): array
     {
-        $token = env('BAKONG_TOKEN');
+        $token = trim(env('BAKONG_TOKEN', ''), " \t\n\r\0\x0B\"'");
         if (!$token) {
             throw new \RuntimeException('Missing env BAKONG_TOKEN');
         }

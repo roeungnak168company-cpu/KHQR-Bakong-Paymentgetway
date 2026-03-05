@@ -94,8 +94,9 @@ class PaymentController extends Controller
         if (!$resp['ok']) {
             return response()->json([
                 'paid' => false,
-                'error' => $resp['body'] ?? 'Bakong request failed',
-            ], $resp['status'] ?? 500);
+                'error' => 'Bakong request failed',
+                'bakong_status' => $resp['status'] ?? null,
+            ], 200); // Always return 200 — never leak Bakong's 403 to the browser
         }
 
         $body = $resp['body'] ?? [];
